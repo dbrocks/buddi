@@ -1,0 +1,28 @@
+extends ./base.jade
+block append style
+    link(rel="stylesheet", type="text/css", href="/assets/style.css")
+block body
+  nav
+    a(href="/home")
+      img#logoSmall(src="/assets/img/logoSmall.png", alt="small logo")
+    .navlink
+      a(href="/logout") Log out
+  section#makeDomo
+    form#domoForm(class="domoForm", name="domoForm", action="/maker", method="POST")
+      label(for="name") Name: 
+      input#domoName(type="text", name="name", placeholder="Pet Name")
+      label(for="age") Age: 
+      input#domoAge(type="text", name="age", placeholder="Pet Age")
+      a#makeDomoSubmit(class="makeDomoSubmit", href="#") Add Pet
+  section#domos
+    if !domos || domos.length == 0
+        div.domo
+            h3.emptyDomo No Pets Yet
+    else
+        each val in domos
+            div.domo
+                img(class="domoFace", src="/assets/img/default.jpg", alt="default")
+                h3.domoName Name: #{val.name}
+                h3.domoAge Age: #{val.age}
+block scripts
+        script(src="/assets/maker.js")
